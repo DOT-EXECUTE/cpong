@@ -1,0 +1,1 @@
+/usr/bin/cc -Wl,--dependency-file=CMakeFiles/cpong.dir/link.d CMakeFiles/cpong.dir/src/input.c.o CMakeFiles/cpong.dir/src/main.c.o CMakeFiles/cpong.dir/src/objects.c.o CMakeFiles/cpong.dir/src/render.c.o CMakeFiles/cpong.dir/src/window.c.o -o cpong  /usr/lib/libSDL3.so.0.4.10

@@ -1,0 +1,3 @@
+/home/aurora/Documents/projects/cpong/build/CMakeFiles/cpong.dir
+/home/aurora/Documents/projects/cpong/build/CMakeFiles/edit_cache.dir
+/home/aurora/Documents/projects/cpong/build/CMakeFiles/rebuild_cache.dir
