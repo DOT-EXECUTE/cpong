@@ -109,6 +109,7 @@ void objectsProcess() {
 
   // Update the Ball
   objectsUpdate(&ball);
+  objectsBallMove();
   renderObject(ball);
 
   renderGetSize(&renderer_width, &renderer_height);
@@ -140,9 +141,25 @@ void objectsPlayerMove(playerInputDir input_dir) {
 }
 
 void objectsBallMove(void) {
-  float rand_intial_velocity_x = (float)(rand() / (float)rand());
-  float rand_intial_velocity_y = (float)(rand() / (float)rand());
+  if (!objects_initialised) {
+    float rand_intial_velocity_x = (float)(rand() / (float)rand());
+    float rand_intial_velocity_y = (float)(rand() / (float)rand());
 
-  ball.velocity.x = rand_intial_velocity_x;
-  ball.velocity.y = rand_intial_velocity_y;
+    ball.velocity.x = /* rand_intial_velocity_x */ 0.05f;
+    ball.velocity.y = /* rand_intial_velocity_y */ 0.05f;
+  }
+
+  // Player Collisions
+  if (ball.position.x == player1.position.x || ball.position.x == player2.position.x) {
+    ball.velocity.x = -ball.velocity.x;
+    ball.velocity.y = -ball.velocity.y;
+  }
+
+  // Edge Collisions
+  if (ball.position.x >= renderer_width || ball.position.x <= 0) {
+    ball.velocity.x = -ball.velocity.x;
+  }
+  if (ball.position.y >= renderer_height || ball.position.y <= 0) {
+    ball.velocity.y = -ball.velocity.y;
+  }
 }
