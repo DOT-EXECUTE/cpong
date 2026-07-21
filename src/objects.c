@@ -9,7 +9,6 @@
 object ball = {
   .velocity = {0.0f, 0.0f},
   .position = {250.0f, 250.0f},
-  .origin = {0.0f, 0.0f},
   .width = 15.0f,
   .height = 15.0f,
 
@@ -20,7 +19,6 @@ object ball = {
 object player1 = {
   .velocity = {0.0f, 0.0f},
   .position = {10.0f, 250.0f},
-  .origin = {0.0f, 0.0f},
   .width = 20.0f,
   .height = 166.67f,
 
@@ -31,7 +29,6 @@ object player1 = {
 object player2 = {
   .velocity = {0.0f, 0.0f},
   .position = {490.0f, 250.0f},
-  .origin = {0.0f, 0.0f},
   .width = 20.0f,
   .height = 166.67f,
 
@@ -47,41 +44,32 @@ bool objectsInitialise() {
     return false;
   }
 
-  ball.origin.x = ball.width / 2;
-  ball.origin.y = ball.height / 2;
-
-  player1.origin.x = player1.width / 4;
-  player1.origin.y = player1.height / 2;
-
-  player2.origin.x = player2.width / 2;
-  player2.origin.y = player2.height / 2;
-
   ball.position.x = renderer_width / 2;
   ball.position.y = renderer_height / 2;
 
   player1.position.x = renderer_width / 2;
-  player1.position.y = renderer_height / 2;
+  player1.position.y = (renderer_height / 2) - (player1.height / 2);
 
   player2.position.x = renderer_width / 2;
-  player2.position.y = renderer_height / 2;
+  player2.position.y = (renderer_height / 2) - (player2.height / 2);
 
   SDL_FRect ballShape = {
-    ball.position.x + ball.origin.x,
-    ball.position.y + ball.origin.y,
+    ball.position.x,
+    ball.position.y,
     ball.width,
     ball.height
   };
 
   SDL_FRect player1Shape = {
-    player1.position.x + ball.origin.x,
-    player1.position.y + ball.origin.x,
+    player1.position.x,
+    player1.position.y,
     player1.width,
     player1.height
   };
 
   SDL_FRect player2Shape = {
-    player2.position.x + ball.origin.x,
-    player2.position.y + ball.origin.y,
+    player2.position.x,
+    player2.position.y,
     player2.width,
     player2.height
   };
@@ -113,6 +101,15 @@ void objectsProcess() {
   renderObject(ball);
 
   renderGetSize(&renderer_width, &renderer_height);
+  
+  // Player Collision Checks
+  if (player1.position.y <= 0) {
+    player1.velocity.y = 0;
+  }
+
+  if ((player1.position.y + player1.height) >= renderer_height) {
+    player1.velocity.y = 0;
+  }
 
   player1.position.x = (renderer_width / 16);
   player2.position.x = renderer_width - (renderer_width / 16);
@@ -142,8 +139,8 @@ void objectsPlayerMove(playerInputDir input_dir) {
 
 void objectsBallMove(void) {
   if (!objects_initialised) {
-    float rand_intial_velocity_x = (float)(rand() / (float)rand());
-    float rand_intial_velocity_y = (float)(rand() / (float)rand());
+    //float rand_intial_velocity_x = (float)(rand() / (float)rand());
+    //float rand_intial_velocity_y = (float)(rand() / (float)rand());
 
     ball.velocity.x = /* rand_intial_velocity_x */ 0.05f;
     ball.velocity.y = /* rand_intial_velocity_y */ 0.05f;

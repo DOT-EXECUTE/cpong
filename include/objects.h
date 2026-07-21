@@ -8,7 +8,6 @@
 typedef struct object{
   vector2 velocity;
   vector2 position;
-  vector2 origin;
 
   float width;
   float height;
