@@ -147,9 +147,8 @@ void objectsBallMove(void) {
   }
 
   // Player Collisions
-  if (ball.position.x == player1.position.x || ball.position.x == player2.position.x) {
+  if (objectsCheckCollision(ball, player1) || objectsCheckCollision(ball, player2)) {
     ball.velocity.x = -ball.velocity.x;
-    ball.velocity.y = -ball.velocity.y;
   }
 
   // Edge Collisions
@@ -159,4 +158,12 @@ void objectsBallMove(void) {
   if (ball.position.y >= renderer_height || ball.position.y <= 0) {
     ball.velocity.y = -ball.velocity.y;
   }
+}
+
+// DISCLAIMER: This section of code is AI Generated, to clean up the code.
+bool objectsCheckCollision(object obj_a, object obj_b) {
+  return (obj_a.position.x < obj_b.position.x + obj_b.width &&
+          obj_a.position.x + obj_a.width > obj_b.position.x &&
+          obj_a.position.y < obj_b.position.y + obj_b.height &&
+          obj_a.position.y + obj_a.height > obj_b.position.y);
 }

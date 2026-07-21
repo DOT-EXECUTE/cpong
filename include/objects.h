@@ -26,4 +26,7 @@ void objectsPlayerMove(playerInputDir direction);
 
 void objectsBallMove(void);
 
+// Helper Func
+bool objectsCheckCollision(object obj_a, object obj_b);
+
 #endif // !OBJECTS_H
